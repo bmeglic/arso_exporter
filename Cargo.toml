@@ -7,9 +7,11 @@ edition = "2021"
 
 [dependencies]
 axum = "0.6.1"
+config = "0.13.3"
 lazy_static = "1.4.0"
 prometheus = { version = "0.13.3", features = ["process"] }
 reqwest = { version = "0.11.13", features = ["blocking"] }
 scraper = "0.14.0"
+serde = { version = "1.0.152", features = ["derive"] }
 thiserror = "1.0.38"
 tokio = { version = "1.24.0", features = ["full"] }
