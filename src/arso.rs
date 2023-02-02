@@ -1,6 +1,6 @@
 use std::num::{ParseFloatError, ParseIntError};
 
-use lazy_static::lazy_static;
+use once_cell::sync::Lazy;
 use prometheus::{self, register_gauge_vec, Encoder, GaugeVec, TextEncoder};
 use reqwest;
 use scraper::{self, error::SelectorErrorKind, ElementRef, Html, Selector};
@@ -132,8 +132,8 @@ struct ArsoField {
     metric: GaugeVec,
 }
 
-lazy_static! {
-    static ref ARSO_FIELDS: Vec<ArsoField> = vec!(
+static ARSO_FIELDS: Lazy<Vec<ArsoField>> = Lazy::new(|| {
+    let fields: Vec<ArsoField> = vec![
         ArsoField {
             selector_tag: "td.t".to_string(),
             field_name: "Temperature".to_string(),
@@ -184,9 +184,10 @@ lazy_static! {
             set_fn: City::set_snowfall,
             get_fn: City::get_snowfall,
             metric: register_gauge_vec!("arso_snowfall", "Snow blanket depth", &["city"]).unwrap(),
-        }
-    );
-}
+        },
+    ];
+    fields
+});
 
 fn parse_city(input: &ElementRef) -> Result<City, ArsoError> {
     let mut city = City::new();

@@ -19,7 +19,7 @@ version = "0.1.0"
 dependencies = [
  "axum",
  "config",
- "lazy_static",
+ "once_cell",
  "prometheus",
  "reqwest",
  "scraper",
