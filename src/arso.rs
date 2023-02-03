@@ -2,7 +2,7 @@ use std::num::{ParseFloatError, ParseIntError};
 
 use once_cell::sync::Lazy;
 use prometheus::{self, register_gauge_vec, Encoder, GaugeVec, TextEncoder};
-use reqwest;
+//use reqwest;
 use scraper::{self, error::SelectorErrorKind, ElementRef, Html, Selector};
 use thiserror::Error;
 
@@ -215,7 +215,7 @@ fn parse_city(input: &ElementRef) -> Result<City, ArsoError> {
     Ok(city)
 }
 
-pub async fn arso_retrieve(cities: &Vec<String>) -> Result<(), ArsoError> {
+pub async fn arso_retrieve(cities: &[String]) -> Result<(), ArsoError> {
     println!("Retrieving data from ARSO");
 
     let body = arso_get_document().await?;

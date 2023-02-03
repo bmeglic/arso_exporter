@@ -57,10 +57,9 @@ async fn main() {
         loop {
             interval.tick().await;
             let status = arso::arso_retrieve(&settings.cities).await;
-            match status {
-                Err(err) => println!("{}", err.to_string()),
-                _ => (),
-            };
+            if let Err(err) = status {
+                println!("{err}");
+            }
         }
     });
 
