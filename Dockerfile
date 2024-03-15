@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.4
 
-FROM rust:1.67 AS builder
+FROM rust:1.69 AS builder
 WORKDIR /root
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
     cargo install cargo-strip
