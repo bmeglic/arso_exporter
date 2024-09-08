@@ -1,6 +1,6 @@
-# syntax=docker/dockerfile:1.4
+# syntax=docker/dockerfile:1
 
-FROM rust:1.69 AS builder
+FROM rust:1.80 AS builder
 WORKDIR /root
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
     cargo install cargo-strip
@@ -13,7 +13,7 @@ RUN --mount=type=cache,target=/usr/local/cargo/registry \
     mv /root/target/release/arso_exporter /root
 
 
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 RUN apt-get update && \
     apt-get upgrade -y && \
     DEBIAN_FRONTEND=noninteractive \
