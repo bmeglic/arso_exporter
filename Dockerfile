@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM rust:1.80 AS builder
+FROM rust:1.95.0 AS builder
 WORKDIR /root
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
     cargo install cargo-strip
@@ -13,7 +13,7 @@ RUN --mount=type=cache,target=/usr/local/cargo/registry \
     mv /root/target/release/arso_exporter /root
 
 
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 RUN apt-get update && \
     apt-get upgrade -y && \
     DEBIAN_FRONTEND=noninteractive \
